@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn,PrimaryColumn, ManyToOne,  JoinColumn, OneToMany } from 'typeorm';
+import { Category } from 'src/Categoria/category.entity';
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
@@ -7,7 +8,7 @@ export class User {
   @Column()
   nombre: string;
 
-  @Column()
+  @PrimaryColumn()
   nombreUsuario: string;
 
   @Column()
@@ -22,11 +23,8 @@ export class User {
   @Column()
   preferencias: string;
 
-  @Column()
-  CategoriaNombre: string;
-  
-  @Column()
-  CategoriaCodigo: string;
+  @OneToMany(() => Category, (category) => {category.Nombre, category.codigo})
+  category: Category[];
   
   @Column()
   Foto: Blob;

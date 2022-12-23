@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn,PrimaryColumn, ManyToOne, OneToMany } from 'typeorm';
 import { Category } from 'src/Categoria/category.entity';
 @Entity()
-export class User {
+export class News {
   @PrimaryGeneratedColumn()
   id: number;
 
