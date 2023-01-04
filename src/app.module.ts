@@ -4,6 +4,9 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './Usuario/user.entity';
 import { ConfigModule } from '@nestjs/config';
+import { Company } from './Empresa/company.entity';
+import { CompaniesModule } from './Empresa/company.module';
+import { DataSource } from 'typeorm';
 
 
 @Module({
@@ -11,16 +14,15 @@ import { ConfigModule } from '@nestjs/config';
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: '127.0.0.1',
       port: 3306,
-      username: process.env.DB_FLUI,
-      password: process.env.SECRET_KEY,
-      database: 'test',
-      entities: [User],
-      synchronize: true,
-    })
+      username: "adminV",
+      password: "P4z_p4r4_4y5_!!",
+      database: 'db_flui_test',
+      entities: [Company],
+      synchronize: false,
+    }),
+    CompaniesModule
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}

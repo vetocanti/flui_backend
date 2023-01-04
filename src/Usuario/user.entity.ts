@@ -1,5 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn,PrimaryColumn, ManyToOne,  JoinColumn, OneToMany } from 'typeorm';
 import { Category } from 'src/Categoria/category.entity';
+import { Blob } from 'buffer';
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
@@ -26,6 +27,8 @@ export class User {
   @OneToMany(() => Category, (category) => {category.Nombre, category.codigo})
   category: Category[];
   
-  @Column()
-  Foto: Blob;
+  @Column({
+    nullable:true
+  })
+  Foto: Express.Multer.File;
 }

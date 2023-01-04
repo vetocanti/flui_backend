@@ -1,26 +1,43 @@
-import { Entity, Column, PrimaryGeneratedColumn,PrimaryColumn, ManyToOne,  JoinColumn, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn,PrimaryColumn, ManyToOne,  JoinColumn, OneToMany, PrimaryColumnCannotBeNullableError } from 'typeorm';
 import { Category } from 'src/Categoria/category.entity';
-@Entity()
+import { Blob } from 'buffer';
+import { Express } from 'express';
+@Entity({name:"empresa"})
 export class Company {
 
   @Column()
   nombre: string;
 
-  @PrimaryColumn()
+  @PrimaryColumn({
+    name:"Nombre Usuario"
+  })
   nombreUsuario: string;
 
-  @Column()
+  @Column({
+    name:"correo electrónico"
+  })
   correoElectronico: string;
   
-  @Column()
+  @Column({
+    name:"Contraseña"
+  })
   clave: string;
 
-  @Column()
+  @Column({
+    name:"Descripcion Empresa"
+  })
   descripcion: string;
 
-  @OneToMany(() => Category, (category) => {category.Nombre, category.codigo})
-  category: Category[];
+  @Column({
+    name:"Telefono"
+  })
+  telefono:string;
+
+  //@OneToMany(() => Category, (category) => {category.Nombre, category.codigo}, PrimaryColumnCannotBeNullableError)
+  //category: Category[];
   
-  @Column()
-  Foto: Blob;
+  /*@Column({
+    nullable:true
+  })
+  Foto: Express.Multer.File;*/
 }
