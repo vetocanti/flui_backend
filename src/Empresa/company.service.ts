@@ -33,5 +33,9 @@ export class CompanyService {
 
         return this.companiesRepository.save(company);
     }
+
+    findOneByUsername(nombreUsuario: string): Promise<Company | undefined > {
+        return this.companiesRepository.findOneBy({nombreUsuario});
+      }
   
 }

@@ -1,12 +1,9 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './Usuario/user.entity';
 import { ConfigModule } from '@nestjs/config';
 import { Company } from './Empresa/company.entity';
 import { CompaniesModule } from './Empresa/company.module';
-import { DataSource } from 'typeorm';
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
@@ -22,7 +19,8 @@ import { DataSource } from 'typeorm';
       entities: [Company],
       synchronize: false,
     }),
-    CompaniesModule
+    CompaniesModule,
+    AuthModule
   ],
 })
 export class AppModule {}

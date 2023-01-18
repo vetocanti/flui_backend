@@ -5,5 +5,5 @@ export interface Company{
     clave: string;
     descripcion:string;
     telefono:string;
-    Foto:Blob;
+    /*Foto:Blob;*/
 }

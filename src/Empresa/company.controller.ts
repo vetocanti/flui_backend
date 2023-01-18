@@ -1,7 +1,8 @@
-import { Controller,Get, Post, Body } from "@nestjs/common";
+import { Controller,Get, Post, Body, UseGuards } from "@nestjs/common";
 import { CreateCompanyDto } from "./company.dto";
 import { CompanyService } from "./company.service";
 import { Company } from "src/interfaces/company.interface";
+import { JwtAuthGuard } from "src/auth/guards/jwt-auth.guard";
 @Controller('companies')
 export class CompanyController {
 
@@ -12,9 +13,10 @@ export class CompanyController {
         this.companyService.create(createCompanyDto);
     } 
 
-   /* @Get() 
+   @UseGuards(JwtAuthGuard)
+   @Get() 
     async findAll(): Promise<Company[]> {
         return this.companyService.findAll();
-    }*/
+    }
     
 }
