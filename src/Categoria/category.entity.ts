@@ -1,12 +1,12 @@
-import { User } from 'src/Usuario/user.entity';
-import { News } from 'src/Noticia/news.entity';
-import { Entity, Column, PrimaryGeneratedColumn,PrimaryColumn, ManyToOne} from 'typeorm';
-@Entity()
-export class Category {
-  @PrimaryGeneratedColumn()
-  id: number;
 
-  @PrimaryColumn()
+import { Entity, Column, PrimaryColumn, OneToMany} from 'typeorm';
+import { Service } from 'src/service/entities/service.entity';
+import { Subcategoria } from 'src/subcategoria/entities/subcategoria.entity';
+@Entity()
+export class categoria {
+
+
+  @Column()
   Nombre: string;
 
   @PrimaryColumn()
@@ -15,10 +15,10 @@ export class Category {
   @Column()
   descripcion: string;
 
-  @ManyToOne(() => User, (user) => user.category)
-  user: User
+  @OneToMany(() => Service, service => service.categoria)
+  servicio: Service[];
 
-  @ManyToOne(() => News, (news) => news.category)
-  news: User
+  @OneToMany(() =>Subcategoria, subcategory => subcategory.categoria)
+  subcategorias: Subcategoria[];
   
 }

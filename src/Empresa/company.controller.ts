@@ -1,8 +1,9 @@
-import { Controller,Get, Post, Body, UseGuards } from "@nestjs/common";
-import { CreateCompanyDto } from "./company.dto";
+import { Controller,Get, Post, Body, UseGuards, UseInterceptors, UploadedFile } from "@nestjs/common";
+import { CreateCompanyDto } from "./dto/company.dto";
 import { CompanyService } from "./company.service";
-import { Company } from "src/interfaces/company.interface";
 import { JwtAuthGuard } from "src/auth/guards/jwt-auth.guard";
+import { FileInterceptor } from "@nestjs/platform-express";
+import { Express } from 'express'
 @Controller('companies')
 export class CompanyController {
 
@@ -11,12 +12,20 @@ export class CompanyController {
     @Post('create')
     async create(@Body() createCompanyDto: CreateCompanyDto) {
         this.companyService.create(createCompanyDto);
+        return "Empresa creada";
     } 
 
-   @UseGuards(JwtAuthGuard)
-   @Get() 
-    async findAll(): Promise<Company[]> {
-        return this.companyService.findAll();
+    @Post('upload')
+    @UseInterceptors(FileInterceptor('file'))
+    uploadFile(@UploadedFile() file: Express.Multer.File) {
+        return this.companyService.uploadImageToCloudinary(file);
     }
+
+
+   @Get() 
+      findAll(){
+      return this.companyService.findAll();
+    }
+    
     
 }

@@ -36,12 +36,8 @@ export class AuthService {
         
         let token = this.jwtService.sign(payload);
 
-        let data = {
-            company: findCompany,
-            token
-        }
 
-        return data;
+        return token;
 
       }
 
