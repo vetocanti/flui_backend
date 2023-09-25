@@ -1,24 +1,22 @@
-import { Entity, Column, PrimaryGeneratedColumn,PrimaryColumn, ManyToOne,  JoinColumn, OneToMany } from 'typeorm';
+import { Entity, Column,PrimaryColumn} from 'typeorm';
 
-@Entity()
+@Entity({name:'usuario'})
 export class User {
-  @PrimaryGeneratedColumn()
-  id: number;
 
   @Column()
   nombre: string;
 
   @PrimaryColumn()
-  nombreUsuario: string;
+  nombreusuario: string;
 
   @Column()
-  correoElectronico: string;
+  email: string;
   
   @Column()
   clave: string;
 
   @Column()
-  fechaNacimiento: Date;
+  fechadenacimiento: Date;
 
   @Column()
   preferencias: string;
@@ -27,7 +25,8 @@ export class User {
   rol:string;
   
   @Column({
-    nullable:true
+    nullable:true,
+    name:"Foto"
   })
   foto: string;
 }

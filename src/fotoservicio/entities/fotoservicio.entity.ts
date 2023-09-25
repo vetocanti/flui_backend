@@ -1,19 +1,17 @@
 import { Service } from "src/service/entities/service.entity";
-import { Column, ManyToMany, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn, Entity } from "typeorm";
+import { Column, ManyToOne, PrimaryGeneratedColumn, Entity } from "typeorm";
 
 @Entity({name:"fotoservicio"})
 export class Fotoservicio {
     @PrimaryGeneratedColumn()
-    id:Number;
+    id:number;
 
-    @ManyToOne(()=>Service, service =>service.id)
-    service:Service
+    @ManyToOne(() => Service, service => service.photoservices)
+    service: Service;
 
     @Column()
     url:string
 
     @Column()
     name:string
-    
-    
 }

@@ -13,6 +13,7 @@ export class FotoservicioService {
   constructor(
     @InjectRepository(Fotoservicio)
     private readonly fotoserviciosRepository: Repository<Fotoservicio>,
+    @InjectRepository(Service)
     private readonly servicioRepository: Repository<Service>,
     private cloudinary: CloudinaryService
     ) {}
@@ -23,10 +24,9 @@ export class FotoservicioService {
 
   async create(createFotoservicioDto: CreateFotoservicioDto) {
     const fotoServicio = new Fotoservicio();
-    let servicio = await this.servicioRepository.findOneBy({id: createFotoservicioDto.servicioid});
     fotoServicio.url = createFotoservicioDto.url;
     fotoServicio.name = createFotoservicioDto.name;
-    fotoServicio.service = servicio;
+    fotoServicio.service.id = createFotoservicioDto.servicioid; 
     return this.fotoserviciosRepository.save(fotoServicio);
 
   }

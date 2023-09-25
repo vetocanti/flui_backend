@@ -4,12 +4,12 @@ import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 export class Contact {
 
 @Column()
-Nombre:string;
+nombre:string;
 
-@PrimaryColumn({name: "correo electronico"})
+@PrimaryColumn()
 email:string;
 
 @Column()
-Comentario: string;
+comentario: string;
     
 }

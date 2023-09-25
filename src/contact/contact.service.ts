@@ -15,9 +15,9 @@ export class ContactService {
 
   create(createContactDto: CreateContactDto) {
     let contact = new Contact;
-    contact.Nombre = createContactDto.Nombre;
+    contact.nombre = createContactDto.Nombre;
     contact.email= createContactDto.email;
-    contact.Comentario = createContactDto.comentario;
+    contact.comentario = createContactDto.comentario;
 
     this.contactRepository.save(contact);
 

@@ -8,12 +8,14 @@ import { JwtStrategy} from './strategies/jwt.strategy';
 import { AuthController } from './auth.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { empresa } from 'src/Empresa/company.entity';
-
+import { User } from 'src/Usuario/user.entity';
+import { UsersModule } from 'src/Usuario/user.module';
 @Module({
   imports: [
-    TypeOrmModule.forFeature([empresa]),
+    TypeOrmModule.forFeature([empresa,User]),
     CompaniesModule,
     PassportModule,
+    UsersModule,
     JwtModule.register({
       secret:jwtConstants.secret,
       signOptions: {expiresIn: '1d'}

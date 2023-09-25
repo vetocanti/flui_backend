@@ -22,4 +22,15 @@ export class AuthController {
    return secretData;
 }
 
+  @Post('loginuser')
+  async loginUser(@Res({passthrough: true}) res: Response, @Body() authDto:AuthDto) {
+    let token = await this.authService.loginuser(authDto)
+   const secretData = {
+    token
+   };
+
+   //res.cookie('auth-cookie', secretData, {httpOnly:false,});
+   return secretData;
+  }
+
 }

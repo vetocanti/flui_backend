@@ -38,21 +38,36 @@ export class ServiceService {
     return this.serviceRepository.find();
   }
 
+  async findById(id:number): Promise <Service | undefined> {
+   //buscar por el ID 
+   return this.serviceRepository.findOneBy({id});
+  }  
+
   findByTitle(titulo: string): Promise<Service | undefined> {
     return this.serviceRepository.findOneBy({titulo});
   }
 
-  update(id: number, updateServiceDto: UpdateServiceDto) {
-    let service = new Service;
-    service.titulo = updateServiceDto.titulo;
-    service.detalle = updateServiceDto.detalle;
-    service.precio = updateServiceDto.precio;
-    this.serviceRepository.update(id, service);
+  //método para actuzalizar un servicio
 
+
+  async update(id: number, updateServiceDto: UpdateServiceDto) {
+    let service = await this.serviceRepository.findOneBy({id});
+    if(updateServiceDto.titulo!='') {
+      service.titulo = updateServiceDto.titulo;
+    }
+    if(updateServiceDto.detalle!='') {
+      service.detalle = updateServiceDto.detalle;
+    }
+
+    if(updateServiceDto.precio!=null) {
+      service.precio = updateServiceDto.precio;
+    }
+    return this.serviceRepository.save(service);
   }
 
-  async remove(id: number) {
+  async remove(id: number):Promise<void> {
     await  this.serviceRepository.delete(id);
   }
-  
+
+ 
 }

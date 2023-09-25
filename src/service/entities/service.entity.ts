@@ -5,7 +5,7 @@ import { Fotoservicio } from "src/fotoservicio/entities/fotoservicio.entity";
 @Entity({name:"servicio"})
 export class Service {
     @PrimaryGeneratedColumn()
-    id:string;
+    id:number;
 
     @Column()
     titulo:string;
@@ -13,7 +13,7 @@ export class Service {
     @Column()
     detalle:string;
     
-    @ManyToOne(()=>empresa, empresa => {empresa.email, empresa.nombre})
+    @ManyToOne(()=>empresa, empresa => {empresa.services})
     empresa :empresa
 
     @Column()
@@ -23,8 +23,8 @@ export class Service {
     @ManyToOne(() => categoria, categoria=>categoria.codigo)
     categoria:categoria;
 
-    
-    @OneToMany (()=> Fotoservicio, photoservice => photoservice.service)
-    photoservices:Fotoservicio[];
+
+    @OneToMany(()=> Fotoservicio, (photoservice) => photoservice.service)
+    photoservices: Fotoservicio[];
     
 }

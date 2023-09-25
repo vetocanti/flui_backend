@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Service } from './entities/service.entity';
 import { empresa } from 'src/Empresa/company.entity';
 import { categoria } from 'src/Categoria/category.entity';
+import { Fotoservicio } from 'src/fotoservicio/entities/fotoservicio.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Service, empresa, categoria])],

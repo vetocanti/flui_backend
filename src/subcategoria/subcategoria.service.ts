@@ -43,6 +43,12 @@ export class SubcategoriaService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} subcategoria`;
+    this.subcategoriaRepository.delete(id);
+    return `Se ha eliminado la subcategoria #${id}`;
   }
-}
+  findOneById(id: number) {
+    return this.subcategoriaRepository.findOne({ where: { id: id }
+    })
+  }
+   
+  }

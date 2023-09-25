@@ -13,7 +13,7 @@ export class CategoryService {
     private readonly categoriesRepository: Repository<categoria>,)
     {}
 
-    findAll(): Promise<categoria[]> {
+    async findAll(): Promise<categoria[]> {
         return this.categoriesRepository.find();
     }
 

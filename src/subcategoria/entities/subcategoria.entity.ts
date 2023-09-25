@@ -1,15 +1,14 @@
 import { categoria } from "src/Categoria/category.entity";
-import { Column, Entity, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({name:"subcategoria"})
 export class Subcategoria {
 
     @PrimaryGeneratedColumn()
-    id: string;
+    id: number;
 
     @Column()
     nombre: string;
-
     @Column()
     descripcion: string;
 

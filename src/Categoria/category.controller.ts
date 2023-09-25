@@ -14,8 +14,8 @@ export class CategoryController {
         this.categoryService.add(CategoryDto);
     }
 
-    @Get('all')
-    async findAll(): Promise<categoria[]> {
+    @Get()
+    findAll() {
         return this.categoryService.findAll();
     }
 

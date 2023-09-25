@@ -1,11 +1,13 @@
 import { Injectable,BadRequestException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { empresa } from "./company.entity";
+import { Service } from "src/service/entities/service.entity";
 import { Repository } from "typeorm";
 import { CreateCompanyDto } from "./dto/company.dto";
 import * as bcrypt from 'bcrypt';
-import { UpdateServiceDto } from "src/service/dto/update-service.dto";
+import { UpdateCompanyDto } from "./dto/update-company.dto";
 import { CloudinaryService } from "src/cloudinary/cloudinary.service";
+const mysql = require('mysql2');
 @Injectable()
 export class CompanyService {
     constructor(
@@ -41,9 +43,37 @@ export class CompanyService {
     findOneByUsername(nombreUsuario: string): Promise<empresa | undefined > {
         return this.companiesRepository.findOneBy({nombreusuario:nombreUsuario});
       }
-    async changePassword(nombreUsuario: string, UpdateCompanyDto:UpdateServiceDto){
+    findOneByEmail(correoElectronico: string): Promise<empresa | undefined > {
+        return this.companiesRepository.findOneBy({email:correoElectronico});
+      }
+    async changePassword(nombreUsuario: string, UpdateCompanyDto:UpdateCompanyDto){
         let company = this.companiesRepository.findOneBy({nombreusuario:nombreUsuario});
         (await company).clave= UpdateCompanyDto.clave;
     }
+
+    async showServices(nombreUsuario: string): Promise<empresa | undefined > {
+        let company = await this.companiesRepository.createQueryBuilder("empresa")
+        .leftJoinAndSelect("empresa.services", "service")
+        .where("empresa.nombreusuario = :nombreusuario", { nombreusuario: nombreUsuario });
+
+        
+        return company.getOne();
+
+      }
+    async getEmpresaAndServicio(nombreUsuario: string): Promise<Object | undefined > {
+        let company = await this.companiesRepository.createQueryBuilder("empresa")
+        .leftJoinAndSelect("empresa.services", "service")
+        .where("empresa.nombreusuario = :nombreusuario", { nombreusuario: nombreUsuario });
+         return (await company.getOne()).services;
+    }
+    async getEmpresaAndServicioById(id: number): Promise<Object | undefined > { 
+        let company = await this.companiesRepository.createQueryBuilder("empresa")
+        .leftJoinAndSelect("empresa.services", "service")
+        .where("service.id = :id", { id: id });
+         return (await company.getOne()).nombreusuario;
+    }
+
+
+    
   
 }

@@ -1,9 +1,9 @@
 export class UserDto {
     nombre: string;
-    nombreUsuario: string;
-    correoElectronico: string;
+    nombreusuario: string;
+    email: string;
     clave: string;
-    fechaNacimiento: Date;
+    fechadenacimiento: Date;
     preferencias: string;
     foto: string; 
     rol: string;
